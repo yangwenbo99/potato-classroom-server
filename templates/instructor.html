@@ -6,32 +6,64 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instructor View</title>
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/main.css" media="screen">
+    <link rel="stylesheet" href="/static/css/main_small.css" media="screen and (max-width:800px)">
+    <link rel="stylesheet" href="/static/css/modern_input.css" media="screen">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<style>
+		.questions-list {
+			margin-top: 20px;
+			padding: 10px;
+			border: 1px solid #ccc;
+			max-height: 300px;
+			overflow-y: auto;
+		}
+
+		.question-item {
+			padding: 5px;
+			cursor: pointer;
+			border-bottom: 1px solid #ccc;
+		}
+
+		.question-item:hover {
+			background-color: #f5f5f5;
+		}
+	</style>
 </head>
 
 <body>
     <div class="container">
         <h1>Instructor View</h1>
-        <form id="question-form">
-            <label for="question">Question:</label>
-            <label for="question_type">Question Type:</label>
-            <select id="question_type" name="question_type">
-                <option value="text">Text</option>
-                <option value="poll">Poll</option>
-            </select>
-            <input type="text" id="question" name="question" required>
-            <div id="choices-container" style="display:none;">
-                <label for="choices">Choices:</label>
-                <textarea type="text" id="choices" name="choices"></textarea>
-            </div>
-            <button type="submit">Post Question</button>
-        </form>
+		<div>
+			<div class='left_bar form_big modern_form'>
+				<label for="questions-file">Select Questions File:</label>
+				<input class='modern_button' type="file" id="questions-file" accept=".md">
+				<div id="questions-list" class="questions-list"></div>
+			</div>
+
+			<div class='right_main'>
+				<form class='' id="question-form">
+					<label for="question_type">Question Type:</label>
+					<select id="question_type" name="question_type">
+						<option value="text">Text</option>
+						<option value="poll">Poll</option>
+					</select>
+					<label for="question">Question:</label>
+					<input type="text" id="question" name="question" required>
+					<div id="choices-container" style="display:none;">
+						<label for="choices">Choices:</label>
+						<textarea type="text" id="choices" name="choices"></textarea>
+					</div>
+					<button type="submit">Post Question</button>
+				</form>
+			</div>
+		</div>
         <div id="results">
             <h2>Results:</h2>
-            <iframe id="results-iframe" src="" style="display:none;"></iframe>
+            <iframe id="results-iframe" src="" style="display:none;"></iframe> 
         </div>
-        <button id="show-results">Show Results</button>
-        <button id="hide-results">Hide Results</button>
+        <button class='modern_button_big' id="show-results">Show Results</button>
+        <button class='modern_button_big' id="hide-results">Hide Results</button>
     </div>
     <script>
         document.getElementById('question_type').addEventListener('change', function () {
@@ -68,7 +100,76 @@
             $("#hide-results").click(function () {
                 $("#results-iframe").css("display", "none");
             });
+
+            // Add an event listener for the file input
+            document.getElementById('questions-file').addEventListener('change', function (event) {
+                // Read the selected file using FileReader API
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    // Parse the markdown file to extract questions and their types
+                    const questions = parseMarkdown(e.target.result);
+
+                    // Display the list of questions
+                    displayQuestions(questions);
+                };
+                reader.readAsText(file);
+            });
         });
+
+        function parseMarkdown(markdown) {
+            const lines = markdown.split('\n');
+            const questions = [];
+            let currentQuestion = null;
+
+            lines.forEach(line => {
+                if (line.startsWith('#')) {
+                    if (currentQuestion) {
+                        questions.push(currentQuestion);
+                    }
+                    currentQuestion = {
+                        type: line.startsWith('# Text') ? 'text' : 'poll',
+                        text: line.slice(2).trim(),
+                        choices: []
+                    };
+                } else if (line.startsWith('-')) {
+                    currentQuestion.choices.push(line.slice(2).trim());
+                }
+            });
+
+            if (currentQuestion) {
+                questions.push(currentQuestion);
+            }
+
+            return questions;
+        }
+
+        function displayQuestions(questions) {
+            const questionsList = document.getElementById('questions-list');
+            questionsList.innerHTML = '';
+
+            questions.forEach((question, index) => {
+                const questionElement = document.createElement('div');
+                questionElement.classList.add('question-item');
+                questionElement.textContent = `${index + 1}. ${question.text}`;
+                questionElement.addEventListener('click', () => {
+                    fillFormFields(question);
+                });
+                questionsList.appendChild(questionElement);
+            });
+        }
+
+        function fillFormFields(question) {
+            document.getElementById('question').value = question.text;
+            document.getElementById('question_type').value = question.type;
+
+            if (question.type === 'poll') {
+                document.getElementById('choices-container').style.display = 'block';
+                document.getElementById('choices').value = question.choices.join('\n');
+            } else {
+                document.getElementById('choices-container').style.display = 'none';
+            }
+        }
     </script>
 </body>
 

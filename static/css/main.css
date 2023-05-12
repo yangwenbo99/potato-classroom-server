@@ -1,0 +1,186 @@
+* {
+	margin:0px;
+    font-family: Verdana, sans-serif;
+}
+
+
+div {
+	margin:10px;
+	display: block;
+	overflow: auto;
+	max-width: 99%;
+}
+
+h1, h2 {
+	text-align: center;
+}
+
+p.indent {
+	text-indent: 1cm;
+}
+
+dd {
+	text-indent: 0.8cm;
+}
+dt {
+	font-size: 120%;
+	font-weight: bold;
+}
+
+nav {
+	/* the validator will report error on this two line, but it's legal accroding to the reference
+	 * https://www.w3schools.com/cssref/pr_class_position.asp
+	 */
+	position: -webkit-sticky; 	/* for safari */
+	position: sticky;
+	z-index: 1; 
+		/* to fix the problem that if the video is under the nav bar,
+		 * the links can't be clicked
+		 */
+	top: 0;
+	padding: 0px;
+	background-color: CornflowerBlue;	/* fallback for old browser */
+	background: -webkit-linear-gradient(#8db0f2,#1b61e4,#1858cd); 
+		/* for old safari version */
+	background: linear-gradient(#8db0f2,#1b61e4,#1858cd);
+		/* 75%, 50%, 45% */
+	overflow: hidden;
+	text-align: center;
+	font-size: 0.87em;
+	line-height: 30px;
+}
+nav li {
+}
+nav a {
+	color: Cornsilk;
+	display: inline-block;
+	width: 200px;
+	margin: 0 40px;
+	color: Cornsilk;
+	text-decoration: none;
+}
+nav a:hover {
+	background: linear-gradient(#80ff80,#00ff00,#00e600);
+		/* 75%, 50%, 45% */
+	background: -webkit-linear-gradient(#80ff80,#00ff00,#00e600); 
+		/* for old safari version */
+}
+#current_page {
+	color: #372f6a;
+	background: linear-gradient(#e6ffff,#b3ffff,#99ffff);
+		/* 95% 85% 80% */
+	background: -webkit-linear-gradient(#e6ffff,#b3ffff,#99ffff); 
+		/* for old safari version */
+}
+
+footer {
+	clear: both;
+	background-color: #2E2759;
+	color: Gainsboro;
+	font-size: 0.8em;
+	padding: 8px 15px;
+	text-align: center;
+}
+footer a {
+	color: DarkTurquoise;
+}
+
+#heading_line {
+	width: 99%;
+	margin: 0px;
+	background-color: LemonChiffon;
+	border-bottom: 4px solid Gainsboro;
+	font-size: 2.2em;
+
+}
+
+#heading_img {
+	height: 1.3em;
+}
+
+#heading_words {
+	margin: 10px auto;
+}
+
+#heading_words h1 {
+	overflow: visible;
+}
+
+.left_bar {
+	clear: left;
+	float: left;
+	/*max-width: 320px;*/
+	width: 40%;
+	margin: 10px 30px 10px 15px;
+	background-color: LightCyan;
+	border-left: 5px solid RoyalBlue;
+	border-radius: 0 10px 10px 0;
+	padding: 12px;
+	box-shadow: 5px 5px 5px Grey;	/*css 3*/
+}
+
+.right_bar {
+	clear: right;
+	float: right;
+	width: 20%;
+	/*max-width: 600px;*/
+	margin: 10px 10px 10px 15px;
+	background-color: LightCyan;
+	border-left: 5px solid RoyalBlue;
+	border-radius: 0 10px 10px 0;
+	padding: 12px;
+	box-shadow: 5px 5px 5px Grey;	/*css 3*/
+}
+
+.left_main {
+	margin: 10px 30px 10px 15px;
+	margin: 10px calc(20% + 50px) 10px 15px;
+	background-color: #f4fff0;
+	border-left: 5px solid Chartreuse;
+	border-radius: 0 10px 10px 0;
+	padding: 12px;
+	min-width: 600px;
+	box-shadow: 5px 5px 5px Grey;	/*css 3*/
+}
+
+.right_main {
+	margin: 10px 15px 10px 30px;
+	margin: 10px 15px 10px calc(30% + 70px);
+	background-color: #f4fff0;
+	border-radius: 0 10px 10px 0;
+	border-left: 5px solid Chartreuse;
+	padding: 12px;
+	/*min-width: 600px;*/
+	box-shadow: 5px 5px 5px Grey;	/*css 3*/
+}
+
+.auto_margin {
+	margin: 10px 15px 10px 30px;
+}
+
+.auto_size {
+	width: auto;
+}
+
+#promotion_info_text h2 {
+	
+}
+
+#reservation {
+	margin: 40px 15px 40px;
+}
+
+#go_top {
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	text-align: center;
+}
+#go_top p {
+	color: Black;
+	text-shadow: 0px 0px 10px white, 2px 2px 2px yellow;
+	text-decoration: none;
+}
+#go_top_img {
+	max-width: 50px;
+}

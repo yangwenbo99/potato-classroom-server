@@ -13,6 +13,7 @@
             setTimeout(function() { location.reload(); }, timeout);
         }
     </script>
+    <link rel="stylesheet" href="/static/css/styles.css">
     <style>
         .card {
             background-color: #dfe49c;
@@ -38,11 +39,11 @@
         <ul>
             {% for choice, count in answers.items() %}
             <li class="item">
-                {{ choice }}: {{ count }}
+                <div style="display: inline-block; width: {{0.18*100}}vw;">{{ choice }}: {{ count }}</div>
                 <div style="display: inline-block; background-color: #c95a9a;
                                                      height: 32px;
                                                      width: {% if max_count > 0 %}
-                                                     {{ (count / max_count) * 0.85 * 100 }}vw
+                                                     {{ (count / max_count) * 0.75 * 100 }}vw
                                                      {% else %}
                                                      0
                                                      {% endif %};">

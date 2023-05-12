@@ -15,7 +15,10 @@ server = ClassroomServer()
 @app.before_request
 def check_instructor_auth():
     if request.path == '/instructor':
-        password = request.args.get('password')
+        if request.method == 'POST':
+            password = request.form.get('password')
+        else:
+            password = request.args.get('password')
         with open(PASSWORD_FILE, 'r') as f:
             stored_password = f.read().strip()
         if password != stored_password:

@@ -1,0 +1,40 @@
+#heading_line {
+	font-size:1.2em;
+}
+nav {
+	position: relative;
+}
+nav a {
+	width: 98%;
+	border-bottom: 1px solid gray;
+	margin: 5px 0;
+}
+
+.left_bar {
+	float: none;
+	overflow: auto;
+	width: 90%;
+	padding: 10px;
+	margin: 10px auto 10px 0;
+}
+.right_bar {
+	float: none;
+	overflow: auto;
+	width: 90%;
+	padding: 10px;
+	margin: 10px auto 10px 0;
+}
+.left_main  {
+	overflow: auto;
+	min-width: 90%;
+	max-width: 90%;
+	padding: 10px;
+	margin: 0;
+}
+.right_main {
+	overflow: auto;
+	min-width: 90%;
+	max-width: 90%;
+	padding: 10px;
+	margin: 0;
+}

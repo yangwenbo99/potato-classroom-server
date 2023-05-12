@@ -1,0 +1,105 @@
+@media screen {
+	.form_big {
+		text-align:center;
+		font-size: 1.1em;
+	}
+	.form_big fieldset {
+		width: 90%;
+	}
+	.form_big label {
+		display: inline-block;
+		text-align: left;
+		width: 30%;
+	}
+	.form_big input[type=text], .form_big input[type=date], 
+	.form_big input[type=time], .form_big input[type=number] {
+		width: 50%;
+		height: 32px;
+		margin: 8px 5px;
+		border: 2px solid #d4d4f7;
+		border-radius: 4px;
+		background-color: #ffffe6;
+		font-size: 1.1em;
+	}
+	.form_big input::file-selector-button {
+		background: transparent;
+		border: 1px solid gray;
+	}
+	.modern_button_big {
+		color: black;
+		height: 60px;
+		width: 180px;
+		font-size: 1.1em;
+		transition: all 0.25s;	/* css 3 */
+		background-color: #E6FF99;
+		border: 0.5px solid #CCCCCC;
+		border-bottom: 5px solid #009900;
+		border-right: 2px solid #009900;
+		margin: 5px;
+		border-radius: 8px 8px 8px 8px;
+	}
+	.modern_button_big:hover {
+		background-color: #D9FF66;
+		border-bottom: 5px solid #006600;
+		border-right: 2px solid #006600;
+	}
+	.modern_button_big:active {
+		background-color: #D9FF66;
+		border-bottom: none;
+		border-right: none;
+		border-top: 5px solid #006600;
+		border-left: 2px solid #006600;
+	}
+
+	.modern_button, 
+	.modern_form input[type=button], .modern_form input[type=submit]{
+		color: black;
+		transition: all 0.25s;	/* css 3 */
+		background-color: #E6FF99;
+		border: 0.5px solid #CCCCCC;
+		border-bottom: 3px solid #009900;
+		border-right: 2px solid #009900;
+		border-radius: 4px 2px 4px 2px;
+		margin: 3px;
+		padding: 5px 15px;
+	}
+	.modern_button:hover, 
+	.modern_form input[type=button]:hover, 
+	.modern_form input[type=submit]:hover {
+		background-color: #D9FF66;
+		border-bottom: 3px solid #006600;
+		border-right: 2px solid #006600;
+	}
+	.modern_button:active, 
+	.modern_form input[type=button]:active, 
+	.modern_form input[type=submit]:active {
+		background-color: #D9FF66;
+		border-bottom: none;
+		border-right: none;
+		border-top: 3px solid #006600;
+		border-left: 2px solid #006600;
+	}
+	.modern_form input[type=number], .modern_form input[type=text]{
+		width: 90px;
+		margin: 2px 5px;
+		border: 2px solid #d4d4f7;
+		border-radius: 3px;
+		background-color: #ffffe6;
+	}
+}
+
+@media print {
+	.form_big fieldset {
+		width: 90%;
+	}
+	.form_big label {
+		display: inline-block;
+		text-align: left;
+		width: 30%;
+	}
+	.form_big input[type=text], .form_big input[type=date], 
+	.form_big input[type=time], .form_big input[type=number] {
+		width: 50%;
+	}
+
+}
