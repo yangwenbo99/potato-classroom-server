@@ -3,6 +3,11 @@ from flask import Flask, render_template, request, jsonify
 from server import ClassroomServer
 
 app = Flask(__name__)
+
+def values_filter(dictionary):
+    return dictionary.values()
+app.jinja_env.filters['values'] = values_filter
+
 server = ClassroomServer()
 
 @app.route('/')
@@ -21,7 +26,8 @@ def student():
 def post_question():
     question = request.form.get('question')
     question_type = request.form.get('question_type')
-    server.post_question(question, question_type)
+    choices = request.form.get('choices')
+    server.post_question(question, question_type, choices)
     return jsonify(success=True)
 
 @app.route('/get_question')
@@ -44,7 +50,8 @@ def show_results():
     if results:
         return render_template('results.html', question=results['question'],
                                question_type=results['question_type'],
-                               answers=results['answers'])
+                               answers=results['answers'],
+                               choices=results.get('choices'))
     else:
         return "No results available."
 

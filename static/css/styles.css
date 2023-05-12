@@ -18,6 +18,28 @@ h1 {
     margin-bottom: 20px;
 }
 
+#question-container {
+    background-color: #f5f5f5;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+#question-text {
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+#answer-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#text-answer, #poll-answer {
+    margin-bottom: 20px;
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -72,4 +94,91 @@ h1 {
 #show-results {
     /* display: none; */
     margin-top: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+iframe#results-iframe {
+    display: none;
+    width: 100%;
+    height: 600px;
+    border: 1px solid #ccc;
+    margin: 20px 0;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    transition-duration: 0.4s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#answer-select {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+#answer-select button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #007bff;
+    color: white;
+    font-size: 18px;
+    border: 1px solid #007bff;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#answer-select button:hover {
+    background-color: #0056b3;
+}
+
+button:disabled, #answer-select button:disabled {
+    background-color: #cccccc;
+    color: #888888;
+    border-color: #cccccc;
+    cursor: not-allowed;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#choices-container {
+    width: 100%;
+}
+
+input[type="text"], textarea {
+    width: 95%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 20px;
+    font-size: 1.2rem; /* Larger font for input */
+}
+
+textarea {
+    height: 150px;
+    /* resize: vertical; */
 }

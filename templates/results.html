@@ -5,16 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Results</title>
+    <script>
+        function refreshPage() {
+            var min = 4;
+            var max = 6;
+            var timeout = Math.floor(Math.random() * (max - min + 1) + min) * 1000;
+            setTimeout(function() { location.reload(); }, timeout);
+        }
+    </script>
+    <style>
+        .card {
+            background-color: #dfe49c;
+            padding: 20px;
+            margin: 10px 10px;
+            display: inline-block;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+            font-size: 28px;
+        }
+        .item {
+            font-size: 32px;
+        }
+    </style>
 </head>
-<body>
-    <h2>Results for the question</h2>
+<body onload="refreshPage()">
+    <h3>Results for the question</h3>
     <h1>{{ question }}</h1>
     <h3>Question type: {{ question_type }}</h3>
     <p>Answers: </p>
-    <ul>
-        {% for answer in answers %}
-            <li>{{ answer }}</li>
-        {% endfor %}
-    </ul>
+    {% if question_type == 'poll' %}
+        {% set max_count = answers|values()|max %}
+        <ul>
+            {% for choice, count in answers.items() %}
+            <li class="item">
+                {{ choice }}: {{ count }}
+                <div style="display: inline-block; background-color: #c95a9a;
+                                                     height: 32px;
+                                                     width: {% if max_count > 0 %}
+                                                     {{ (count / max_count) * 0.85 * 100 }}vw
+                                                     {% else %}
+                                                     0
+                                                     {% endif %};">
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <ul>
+            {% for answer in answers %}
+                <li class="card">{{ answer }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 </html>
