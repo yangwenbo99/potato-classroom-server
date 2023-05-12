@@ -59,7 +59,7 @@
 			</div>
 		</div>
         <div id="results">
-            <h2>Results:</h2>
+			<h2>Results: <a href='/results'>(Open in new page)</a></h2>
             <iframe id="results-iframe" src="" style="display:none;"></iframe> 
         </div>
         <button class='modern_button_big' id="show-results">Show Results</button>
@@ -128,8 +128,8 @@
                         questions.push(currentQuestion);
                     }
                     currentQuestion = {
-                        type: line.startsWith('# Text') ? 'text' : 'poll',
-                        text: line.slice(2).trim(),
+                        type: line.search(/^##*\s*Text/i) >= 0 ? 'text' : 'poll',
+                        text: line.replace(/^##*\s*(Text|Poll)/i, '').trim(),
                         choices: []
                     };
                 } else if (line.startsWith('-')) {

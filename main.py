@@ -27,6 +27,10 @@ def check_instructor_auth():
 def index():
     return render_template('index.html')
 
+@app.route('/qrcode')
+def qrcode():
+    return render_template('qrcode.html')
+
 @app.route('/instructor', methods=['GET', 'POST'])
 def instructor():
     return render_template('instructor.html')
