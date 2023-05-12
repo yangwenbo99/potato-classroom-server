@@ -1,0 +1,20 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <h2>Results for the question</h2>
+    <h1>{{ question }}</h1>
+    <h3>Question type: {{ question_type }}</h3>
+    <p>Answers: </p>
+    <ul>
+        {% for answer in answers %}
+            <li>{{ answer }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

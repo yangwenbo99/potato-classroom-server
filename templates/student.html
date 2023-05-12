@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student View</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Student View</h1>
+        <div id="question-container">
+            <h2 id="question-text">Waiting for a question...</h2>
+            <form id="answer-form" style="display:none;">
+                <div id="text-answer" style="display:none;">
+                    <label for="text-answer-input">Your answer:</label>
+                    <input type="text" id="text-answer-input" name="answer">
+                </div>
+                <div id="poll-answer" style="display:none;">
+                    <label for="poll-answer-input">Your vote:</label>
+                    <input type="text" id="poll-answer-input" name="answer">
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+    <script src="/static/js/scripts.js"></script>
+    <script>
+        function updateQuestion() {
+            fetch('/get_question')
+                .then(response => response.json())
+                .then(data => {
+                    if (data) {
+                        document.getElementById('question-text').innerText = data.question;
+                        document.getElementById('answer-form').style.display = 'block';
+                        if (data.question_type === 'text') {
+                            document.getElementById('text-answer').style.display = 'block';
+                            document.getElementById('poll-answer').style.display = 'none';
+                        } else {
+                            document.getElementById('text-answer').style.display = 'none';
+                            document.getElementById('poll-answer').style.display = 'block';
+                        }
+                    } else {
+                        document.getElementById('question-text').innerText = 'Waiting for a question...';
+                        document.getElementById('answer-form').style.display = 'none';
+                    }
+                });
+        }
+
+        document.getElementById('answer-form').addEventListener('submit', (event) => {
+            event.preventDefault();
+            const answer = event.target.elements.answer.value;
+            fetch('/submit_answer', {
+                method: 'POST',
+                body: new FormData(event.target)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Answer submitted successfully!');
+                        updateQuestion();
+                    } else {
+                        alert('Error submitting answer. Please try again.');
+                    }
+                });
+        });
+
+        setInterval(updateQuestion, 5000);
+    </script>
+</body>
+</html>

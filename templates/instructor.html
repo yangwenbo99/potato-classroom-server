@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instructor View</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Instructor View</h1>
+        <form id="question-form">
+            <label for="question">Question:</label>
+            <input type="text" id="question" name="question" required>
+            <label for="question_type">Question Type:</label>
+            <select id="question_type" name="question_type">
+                <option value="poll">Poll</option>
+                <option value="text">Text</option>
+            </select>
+            <button type="submit">Post Question</button>
+        </form>
+        <div id="results">
+            <h2>Results:</h2>
+            <ul id="results-list"></ul>
+        </div>
+        <button id="show-results">Show Results</button>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#question-form").submit(function(event) {
+                event.preventDefault();
+                const question = $("#question").val();
+                const question_type = $("#question_type").val();
+                $.post("/post_question", { question: question, question_type: question_type }, function(data) {
+                    if (data.success) {
+                        $("#question").val("");
+                        alert("Question posted successfully!");
+                    } else {
+                        alert("Error posting question.");
+                    }
+                });
+            });
+
+            $("#show-results").click(function() {
+                $.get("/get_results", function(data) {
+                    if (data) {
+                        $("#results-list").empty();
+                        $("#results-list").append("<li><strong>Question:</strong> " + data.question + "</li>");
+                        $("#results-list").append("<li><strong>Type:</strong> " + data.question_type + "</li>");
+                        $("#results-list").append("<li><strong>Answers:</strong></li>");
+                        data.answers.forEach(function(answer) {
+                            $("#results-list").append("<li>" + answer + "</li>");
+                        });
+                    } else {
+                        alert("No results available.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
