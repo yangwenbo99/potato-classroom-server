@@ -1,6 +1,8 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, abort
 from server import ClassroomServer
+
+PASSWORD_FILE = 'password.txt'
 
 app = Flask(__name__)
 
@@ -10,11 +12,19 @@ app.jinja_env.filters['values'] = values_filter
 
 server = ClassroomServer()
 
+@app.before_request
+def check_instructor_auth():
+    if request.path == '/instructor':
+        password = request.args.get('password')
+        with open(PASSWORD_FILE, 'r') as f:
+            stored_password = f.read().strip()
+        if password != stored_password:
+            abort(401)
 @app.route('/')
 def index():
     return render_template('index.html')
 
-@app.route('/instructor')
+@app.route('/instructor', methods=['GET', 'POST'])
 def instructor():
     return render_template('instructor.html')
 

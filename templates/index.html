@@ -10,8 +10,13 @@
     <div class="container">
         <h1>Welcome to the Classroom Interaction System</h1>
         <div class="options">
-            <a href="/instructor" class="btn">Instructor</a>
-            <a href="/student" class="btn">Student</a>
+            <form action="/instructor" method="post">
+                <input type="password" name="password" placeholder="Password">
+                <button type="submit" class="btn">Instructor</button>
+            </form>
+            <form action="/student" method="get">
+                <button type="submit" class="btn">Student</button>
+            </form>
             <a href="/results" class="btn">Results</a>
         </div>
     </div>
