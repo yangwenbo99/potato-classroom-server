@@ -34,6 +34,7 @@ class ClassroomServer:
 
     def submit_answer(self, answer):
         if self.current_question:
+            print(answer)
             if (self.current_question['question_type'] == 'poll' and
                 answer in self.current_question['choices']):
                 self.answers[self.current_question['timestamp']].append(answer)

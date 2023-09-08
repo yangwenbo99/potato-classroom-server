@@ -53,6 +53,7 @@ def get_question():
 
 @app.route('/submit_answer', methods=['POST'])
 def submit_answer():
+    print(request.form)
     answer = request.form.get('answer')
     server.submit_answer(answer)
     return jsonify(success=True)

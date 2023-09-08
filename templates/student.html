@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/static/css/main_small.css" media="screen and (max-width:800px)">
     <link rel="stylesheet" href="/static/css/modern_input.css" media="screen">
     <link rel="stylesheet" href="/static/css/styles.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -29,7 +30,7 @@
                 </div>
                 <input type="hidden" name="answer" id="hidden-answer">
                 <div id="message-container"></div>
-                <button id="submit" type="submit">Submit</button>
+                <button id="submit_button" type="submit">Submit</button>
             </form>
         </div>
     </div>
@@ -51,7 +52,7 @@
             var textAnswer = document.getElementById('text-answer');
             var pollAnswer = document.getElementById('poll-answer');
             var answerSelect = document.getElementById('answer-select');
-            var submitButton = document.getElementById('submit');
+            var submitButton = document.getElementById('submit_button');
 
             questionText.textContent = questionData.question;
             answerForm.style.display = 'block';
@@ -93,9 +94,12 @@
 
         document.getElementById('answer-select').addEventListener('click', (event) => {
             if (event.target.classList.contains('poll-choice')) {
+				event.preventDefault();
                 const hiddenAnswer = document.getElementById('hidden-answer');
                 hiddenAnswer.value = event.target.value;
                 setPollButtonsEnabled(false);
+                console.log('Button')
+                submitResult(document.getElementById('answer-form'));
             }
         });
 
@@ -110,35 +114,44 @@
             messageContainer.style.color = isError ? 'red' : 'green';
         }
 
-        document.getElementById('answer-form').addEventListener('submit', (event) => {
-            event.preventDefault();
+        function submitResult(form_target) {
             const answerInput = document.getElementById('answer-input');
             const answerSelect = document.getElementById('answer-select');
             const hiddenAnswer = document.getElementById('hidden-answer');
             const textAnswer = document.getElementById('text-answer');
             const pollAnswer = document.getElementById('poll-answer');
-            const submitButton = document.getElementById('submit');
+            const submitButton = document.getElementById('submit_button');
 
             submitButton.disabled = true;
 
             if (textAnswer.style.display != 'none') {
                 hiddenAnswer.value = answerInput.value;
             } 
-            fetch('/submit_answer', {
-                method: 'POST',
-                body: new FormData(event.target)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
+
+			const question_id = 0; // $("#answer-form").data("question-id");
+			const answer = hiddenAnswer.value; // $("#hiddenAnswer").val();
+			console.log('Submitting ' + question_id + ' ' + answer);
+
+			$.post("/submit_answer", { answer: answer, question_id: question_id }, function(data) {
+				if (data.success) {
+					$("#answer").val("");
                         showMessage('Answer submitted successfully!', false);
                         updateQuestion();
-                    } else {
+				} else {
                         showMessage('Error submitting answer. Please try again.', true);
-                    }
+				}
+			});
+        }
 
-                });
+        document.getElementById('answer-form').addEventListener('submit', (event) => {
+            console.log('Submitting')
+            event.preventDefault();
+            const textAnswer = document.getElementById('text-answer');
+            if (currentQuestion && currentQuestion.question_type == 'text') {
+                submitResult(event.taget);
+            }
         });
+        
         updateQuestion();
         setInterval(updateQuestion, 5000);
     </script>

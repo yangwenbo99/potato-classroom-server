@@ -41,7 +41,7 @@ $(document).ready(function() {
     }
 
     fetchQuestion();
-
+/*
     $("#answer-form").submit(function(event) {
         event.preventDefault();
         const answer = $("#answer").val();
@@ -56,4 +56,5 @@ $(document).ready(function() {
             }
         });
     });
+*/
 });
