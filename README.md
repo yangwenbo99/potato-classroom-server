@@ -24,6 +24,7 @@ Note that this method should only be used for testing purpose.  If you have a ve
 
 ## Licensing and Acknowledgements
 
-I intended to release this project using GPT or MIT license (or even WTFPL), but since this project heavily used ChatGPT for development, I have to confirm the quality and independence of the code before releasing it as a FOSS.
+I heavily used ChatGPT for the initial development of this project. 
 
+I strongly condemn the activity of charging students' a large subscription fee after selling students instructional equipments.  I wish these companies an early and timely bankruptcy.  I also highly suggest instructors to use [free](https://www.gnu.org/education/education.html#content) alternatives like my potato server for their classes.  To deter people from using this software to grab more money, an XFree86-like license is used. 
 

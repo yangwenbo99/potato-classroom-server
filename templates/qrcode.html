@@ -1,23 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QR Code for Student Access</title>
-    <link rel="stylesheet" href="/static/css/styles.css">
-    <link rel="stylesheet" href="/static/css/main.css" media="screen">
-    <link rel="stylesheet" href="/static/css/main_small.css" media="screen and (max-width:800px)">
-    <link rel="stylesheet" href="/static/css/modern_input.css" media="screen">
-    <script src="/static/js/qrcode.js"></script>
-</head>
-<body>
+{% extends 'base.html' %}
+{% block head %}
+<script src="/static/js/qrcode.js"></script>
+{% endblock %}
+{% block title %}QR Code for Student Access{% endblock %}
+{% block content %}
     <div class="container">
         <h1>Scan the QR Code to Access the Student Page</h1>
         <div id="qrcode" style="display: flex; justify-content: center;"></div>
     </div>
-    <footer>
-        <a href='/static/LICENSE'>Copyright (C) 2023 Wenbo (Paul) Yang</a>
-    </footer>
     <script src="/static/js/scripts.js"></script>
     <script>
         var baseUrl = window.location.origin;
@@ -30,5 +20,4 @@
             correctLevel: QRCode.CorrectLevel.H
         });
     </script>
-</body>
-</html>
+{% endblock %}

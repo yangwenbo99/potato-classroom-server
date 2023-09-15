@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %} - Paul's potato server</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/css/main.css" media="screen">
+    <link rel="stylesheet" href="/static/css/main_small.css" media="screen and (max-width:800px)">
+    <link rel="stylesheet" href="/static/css/modern_input.css" media="screen">
+    {% block head %}{% endblock %}
+</head>
+<body>
+    {% block content %}{% endblock %}
+    <footer>
+        <a href='/static/LICENSE'>Copyright (C) 2023 Wenbo (Paul) Yang</a>
+        <br>
+        <a href='https://github.com/yangwenbo99/potato-classroom-server'>Project Page</a>
+    </footer>
+    <script src="/static/js/scripts.js"></script>
+</body>
+</html>
+

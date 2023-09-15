@@ -1,18 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Student View</title>
-    <link rel="stylesheet" href="/static/css/main.css" media="screen">
-    <link rel="stylesheet" href="/static/css/main_small.css" media="screen and (max-width:800px)">
-    <link rel="stylesheet" href="/static/css/modern_input.css" media="screen">
+{% extends 'base.html' %}
+{% block title %}Student View{% endblock %}
+{% block head %}
     <link rel="stylesheet" href="/static/css/styles.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-</head>
+{% endblock %}
 
-<body>
+{% block content %}
     <div class="container">
         <h1>Student View</h1>
         <div id="question-container">
@@ -34,9 +27,6 @@
             </form>
         </div>
     </div>
-    <footer>
-        <a href='/static/LICENSE'>Copyright (C) 2023 Wenbo (Paul) Yang</a>
-    </footer>
     <script src="/static/js/scripts.js"></script>
     <script>
         currentQuestion = null;
@@ -158,6 +148,4 @@
         updateQuestion();
         setInterval(updateQuestion, 5000);
     </script>
-</body>
-
-</html>
+{% endblock %}
